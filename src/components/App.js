@@ -69,8 +69,8 @@ class App extends React.Component {
               Object
                 .keys(this.state.fishes)
                 .map(key => <Fish
-                              key={key}  // the prop 'key' is reserved for React, don't use it
-                              index={key} // but we need to have access to the key, so we use our own property, we called it 'index'
+                              key={key}  // the prop 'key' is reserved for React, dont use it
+                              index={key} // but we need to have access to the key, so we use our own property, we called it index
                               details={this.state.fishes[key]}
                               addToOrder={this.addToOrder}/>)
             }
