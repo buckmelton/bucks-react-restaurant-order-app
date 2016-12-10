@@ -29,6 +29,7 @@ class App extends React.Component {
       context: this,
       state: 'fishes'
     });
+    
   }
 
   componentWillUnmount(){

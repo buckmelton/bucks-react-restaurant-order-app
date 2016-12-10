@@ -6,4 +6,5 @@ const base = Rebase.createClass({
   databaseURL: "https://catch-of-the-day-buck-melton.firebaseio.com"
 });
 
+
 export default base;
