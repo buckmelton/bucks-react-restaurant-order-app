@@ -7,6 +7,8 @@ class Fish extends React.Component {
     // To avoid having to continually type 'this.props.details'
     // ES6 destructuring, equivalent to const details = this.props.details;
     const { details } = this.props;
+    const isAvailable = details.status === 'available';
+    const buttonText = isAvailable ? 'Add To Order' : 'Sold Out!';
 
     return(
       <li className="menu-fish">
@@ -16,7 +18,7 @@ class Fish extends React.Component {
           <span className="price">{formatPrice(details.price)}</span>
         </h3>
         <p>{details.desc}</p>
-        <button>Add To Order</button>
+        <button onClick={() => this.props.addToOrder(this.props.index)} disabled={!isAvailable}>{buttonText}</button>
       </li>
     )
   }

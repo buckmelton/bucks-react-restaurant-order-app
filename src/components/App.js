@@ -2,8 +2,9 @@ import React from 'react';
 import Header from './Header';
 import Order from './Order';
 import Inventory from './Inventory';
-import sampleFishes from '../sample-fishes';
 import Fish from './Fish';
+import sampleFishes from '../sample-fishes';
+import base from '../base';
 
 class App extends React.Component {
 
@@ -12,6 +13,7 @@ class App extends React.Component {
 
     this.addFish = this.addFish.bind(this);
     this.loadSamples = this.loadSamples.bind(this);
+    this.addToOrder = this.addToOrder.bind(this);
 
     // initial state
     this.state = {
@@ -19,6 +21,18 @@ class App extends React.Component {
       order: {},
     };
 
+  }
+
+  componentWillMount(){
+    this.ref = base.syncState(`${this.props.params.storeID}/fishes`,
+    {
+      context: this,
+      state: 'fishes'
+    });
+  }
+
+  componentWillUnmount(){
+    base.removeBinding(this.ref);
   }
 
   addFish(fish) {
@@ -47,6 +61,17 @@ class App extends React.Component {
     });
   }
 
+  addToOrder(key) {
+    // best practice: first make copy of state
+    const order = {...this.state.order};
+
+    // update or add the new number of fish ordered
+    order[key] = order[key] + 1 || 1;
+
+    // update state
+    this.setState({ order });  // shortcut for ({ order: order})
+  }
+
   render() {
     return(
       <div className="catch-of-the-day">
@@ -56,11 +81,15 @@ class App extends React.Component {
             {
               Object
                 .keys(this.state.fishes)
-                .map(key => <Fish key={key} details={this.state.fishes[key]}/>)
+                .map(key => <Fish
+                              key={key}  // the prop 'key' is reserved for React, dont use it
+                              index={key} // but we need to have access to the key, so we use our own property, we called it index
+                              details={this.state.fishes[key]}
+                              addToOrder={this.addToOrder}/>)
             }
           </ul>
         </div>
-        <Order />
+        <Order fishes={this.state.fishes} order={this.state.order}/>
         <Inventory addFish={this.addFish} loadSamples={this.loadSamples}/>
       </div>
     )
