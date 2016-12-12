@@ -13,6 +13,7 @@ class App extends React.Component {
 
     this.addFish = this.addFish.bind(this);
     this.updateFish = this.updateFish.bind(this);
+    this.removeFish = this.removeFish.bind(this);
     this.loadSamples = this.loadSamples.bind(this);
     this.addToOrder = this.addToOrder.bind(this);
 
@@ -73,9 +74,23 @@ class App extends React.Component {
   }
 
   updateFish(key, updatedFish) {
+    // Make copy of fishes
     const fishes = {...this.state.fishes};
+
+    // Update fish in copy.
     fishes[key] = updatedFish;
+
+    // Set copy to be new state.
     this.setState( { fishes } );
+  }
+
+  removeFish(key) {
+    const fishes = {...this.state.fishes};
+    // Normally you would do the following, but Firebase doesn't play well
+    // with 'delete' operation, instead need to explicitly set to null
+    // delete fishes[key];
+    fishes[key] = null;
+    this.setState({fishes});
   }
 
   loadSamples() {
@@ -120,6 +135,7 @@ class App extends React.Component {
         <Inventory
           addFish={this.addFish}
           updateFish={this.updateFish}
+          removeFish={this.removeFish}
           loadSamples={this.loadSamples}
           fishes={this.state.fishes}
         />
