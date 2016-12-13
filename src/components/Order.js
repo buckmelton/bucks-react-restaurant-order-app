@@ -50,7 +50,7 @@ class Order extends React.Component {
           { orderIds.map(this.renderOrder) }
           <li className="total">
             <strong>Total:</strong>
-            { formatPrice(total)}
+            { formatPrice(total) }
           </li>
         </CSSTransitionGroup>
       </div>
