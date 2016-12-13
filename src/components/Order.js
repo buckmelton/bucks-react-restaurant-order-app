@@ -26,8 +26,8 @@ class Order extends React.Component {
             component="span"
             className="count"
             transitionName="count"
-            transitionEnterTimeout={2500}
-            transitionLeaveTimeout={2500}
+            transitionEnterTimeout={250}
+            transitionLeaveTimeout={250}
           >
             <span key={count}>{count}</span>
           </CSSTransitionGroup>
