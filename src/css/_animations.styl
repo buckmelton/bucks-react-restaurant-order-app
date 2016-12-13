@@ -22,3 +22,9 @@
     max-height 0
     padding 0 !important
     transform translateX(120%)
+
+.count-enter
+  transition all 2.5s
+  transform translateY(100%) // Start off screen
+  &.count-enter-active
+    transform translateY(0) // Leave it in its normal resting spot

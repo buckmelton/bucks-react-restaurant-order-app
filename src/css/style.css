@@ -24,6 +24,16 @@
   -webkit-transform: translateX(120%);
           transform: translateX(120%);
 }
+.count-enter {
+  -webkit-transition: all 2.5s;
+  transition: all 2.5s;
+  -webkit-transform: translateY(100%);
+          transform: translateY(100%);
+}
+.count-enter.count-enter-active {
+  -webkit-transform: translateY(0);
+          transform: translateY(0);
+}
 @font-face {
   font-family: "haymakerregular";
   src: url("./fonts/haymaker-webfont.eot");
