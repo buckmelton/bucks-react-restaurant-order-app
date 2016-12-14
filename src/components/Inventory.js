@@ -7,6 +7,11 @@ class Inventory extends React.Component {
     super();
     this.renderInventory = this.renderInventory.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.renderLogin = this.renderLogin.bind(this);
+    this.state = {
+      uid: null,
+      owner: null
+    };
   }
 
   handleChange(e,key) {
@@ -38,7 +43,22 @@ class Inventory extends React.Component {
     )
   }
 
+  renderLogin() {
+    return (
+      <nav className="login">
+        <h2>Inventory</h2>
+        <p>Sign in to manage your store's inventory.</p>
+        <button className="github" onClick={() => this.authenticate('github')}>Log in with Github</button>
+        <button className="facebook" onClick={() => this.authenticate('facebook')}>Log in with Facebook</button>
+      </nav>
+    )
+  }
+
   render() {
+    // Check is a user is not logged in
+    if (!this.state.uid) {
+      return <div>{this.renderLogin()}</div>
+    }
     return(
       <div>
         <h2>Inventory</h2>
