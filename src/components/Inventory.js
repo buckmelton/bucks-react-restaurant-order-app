@@ -55,13 +55,27 @@ class Inventory extends React.Component {
   }
 
   render() {
+    // Create log out button
+    const logout = <button>Log Out</button>
+
     // Check is a user is not logged in
     if (!this.state.uid) {
       return <div>{this.renderLogin()}</div>
     }
+
+    // Check if user is the owner of this store
+    if (this.state.uid !== this.state.owner) {
+      return (
+        <div>
+          Sorry, you aren't the owner of this store!
+          {logout}
+        </div>      
+      )
+    }
     return(
       <div>
         <h2>Inventory</h2>
+        {logout}
         {/* Loop through each fish to display it as inventory */}
         {Object.keys(this.props.fishes).map(this.renderInventory)}
 
