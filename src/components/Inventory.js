@@ -1,5 +1,6 @@
 import React from 'react';
 import AddFishForm from './AddFishForm';
+import base from '../base';
 
 class Inventory extends React.Component {
 
@@ -8,6 +9,8 @@ class Inventory extends React.Component {
     this.renderInventory = this.renderInventory.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.renderLogin = this.renderLogin.bind(this);
+    this.authenticate = this.authenticate.bind(this);
+    this.authHandler = this.authHandler.bind(this);
     this.state = {
       uid: null,
       owner: null
@@ -43,6 +46,15 @@ class Inventory extends React.Component {
     )
   }
 
+  authenticate(provider) {
+    console.log(`Trying to log in with ${provider}`);
+    base.authWithOAuthPopup(provider, this.authHandler);
+  }
+
+  authHandler(err, authData) {
+    console.log(authData);
+  }
+
   renderLogin() {
     return (
       <nav className="login">
@@ -69,7 +81,7 @@ class Inventory extends React.Component {
         <div>
           Sorry, you aren't the owner of this store!
           {logout}
-        </div>      
+        </div>
       )
     }
     return(
