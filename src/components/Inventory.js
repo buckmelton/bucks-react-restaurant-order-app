@@ -17,6 +17,14 @@ class Inventory extends React.Component {
     };
   }
 
+  componentDidMount() {
+    base.onAuth((user) => {
+      if (user) {
+        this.authHandler(null, { user });
+      }
+    })
+  }
+
   handleChange(e,key) {
     const fish = this.props.fishes[key];
     // update a copy of the fish with changes
@@ -71,6 +79,11 @@ class Inventory extends React.Component {
           owner: authData.user.uid
         })
       }
+
+      this.setState({
+        uid: authData.user.uid,
+        owner: data.owner || authData.user.uid
+      });
     });
 
 
