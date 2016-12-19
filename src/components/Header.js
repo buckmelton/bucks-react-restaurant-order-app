@@ -10,16 +10,14 @@ var Header = function(props) {
 
   return(
     <header className="top">
-      <h1>Catch
+      <h1>Goff
         <span className="ofThe">
-          <span className="of">
-            of
+          <span className="of">&nbsp;
           </span>
-          <span className="the">
-            the
+          <span className="the">&nbsp;
           </span>
         </span>
-        Day
+        Seafood
       </h1>
       <h3 className="tagline"><span>{props.tagline}</span></h3>
     </header>
