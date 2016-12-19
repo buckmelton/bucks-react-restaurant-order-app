@@ -7,6 +7,7 @@ class Inventory extends React.Component {
   constructor() {
     super();
     this.renderInventory = this.renderInventory.bind(this);
+    this.logout = this.logout.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.renderLogin = this.renderLogin.bind(this);
     this.authenticate = this.authenticate.bind(this);
@@ -23,6 +24,11 @@ class Inventory extends React.Component {
         this.authHandler(null, { user });
       }
     })
+  }
+
+  logout() {
+    base.unauth();
+    this.setState({uid: null});
   }
 
   handleChange(e,key) {
@@ -77,7 +83,7 @@ class Inventory extends React.Component {
       if (!data.owner) {
         storeRef.set({
           owner: authData.user.uid
-        })
+        });
       }
 
       this.setState({
@@ -103,7 +109,7 @@ class Inventory extends React.Component {
 
   render() {
     // Create log out button
-    const logout = <button>Log Out</button>
+    const logout = <button onClick={this.logout}>Log Out</button>
 
     // Check is a user is not logged in
     if (!this.state.uid) {
